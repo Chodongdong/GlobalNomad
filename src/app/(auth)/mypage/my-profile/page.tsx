@@ -5,18 +5,14 @@ import Input from '@/src/components/Input/Input';
 import Button from '@/src/components/Button/Button';
 import { useMyPageForm } from '@/src/features/public/hooks/useMyPageForm';
 import { updateMyProfile } from '@/src/features/mypage/services/userService';
-import { useUser } from '@/src/app/(auth)/mypage/MypageLayout';
-import { getGlobalCancelHandler } from '@/src/app/(auth)/mypage/MypageLayout';
+import { useUserStore } from '@/src/store/userStore';
+import { useMypageStore } from '@/src/store/mypageStore';
 
 export default function MyProfilePage() {
   const [isSaving, setIsSaving] = useState(false);
 
-  const { userData, refreshUser } = useUser();
-
-  const handleMobileCancel = () => {
-    const cancelHandler = getGlobalCancelHandler();
-    if (cancelHandler) cancelHandler();
-  };
+  const { userData, fetchUser } = useUserStore();
+  const setShowMobileContent = useMypageStore((s) => s.setShowMobileContent);
 
   // 폼 상태 관리
   const {
@@ -69,7 +65,7 @@ export default function MyProfilePage() {
       await updateMyProfile(updateData);
       alert('정보가 수정되었습니다.');
 
-      await refreshUser();
+      await fetchUser();
     } catch (error) {
       console.error('정보 수정 실패:', error);
       alert('정보 수정에 실패했습니다.');
@@ -89,7 +85,7 @@ export default function MyProfilePage() {
 
   return (
     <div className="flex-1">
-      <div className="max-w-[640px] md:scale-[0.857] md:origin-top-left md:-mr-[90px] lg:scale-100 lg:mr-0">
+      <div className="max-w-160 md:scale-[0.857] md:origin-top-left md:-mr-22.5 lg:scale-100 lg:mr-0">
         {/* 페이지 제목 */}
         <div className="mb-8">
           <h1 className="text-lg font-bold text-gray-900 mb-2">내 정보</h1>
@@ -159,7 +155,7 @@ export default function MyProfilePage() {
             {/* 취소하기 버튼 모바일에서만 */}
             <Button
               type="button"
-              onClick={handleMobileCancel}
+              onClick={() => setShowMobileContent(false)}
               variant="secondary"
               size="sm"
               className="md:hidden"
