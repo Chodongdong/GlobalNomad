@@ -10,6 +10,7 @@ import Input from "@/src/components/Input/Input";
 import CompleteModal from "@/src/components/Modal/CompleteModal";
 import { useSignupForm } from "@/src/features/public/hooks/useSignupForm";
 import { useSignupSubmit } from "@/src/features/public/hooks/useSignupSubmit";
+import { getKakaoAuthUrl } from "@/src/lib/kakaoAuth";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -127,7 +128,7 @@ export default function SignupPage() {
             <div className="h-px flex-1 bg-gray-200" />
           </div>
 
-          <Button variant="secondary" fullWidth href="/oauth/signup/kakao">
+          <Button variant="secondary" fullWidth href={getKakaoAuthUrl("signup")}>
             <KakaoIcon />
             카카오 회원가입
           </Button>
