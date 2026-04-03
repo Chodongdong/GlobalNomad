@@ -2,14 +2,20 @@
   /* =========================
      background / foreground
      ========================= */
-  --background: #ffffff;
+  --background: #f5f6ff;
   --foreground: #323236;
 
   /* =========================
      brand
      ========================= */
-  --primary-500: #3d9ef2;
-  --primary-100: #e5f3ff;
+  --primary-500: #6366f1;
+  --primary-600: #4f46e5;
+  --primary-100: #eef2ff;
+
+  /* =========================
+     surface
+     ========================= */
+  --surface-dark: #0f172a;
 
   /* =========================
      semantic
@@ -43,7 +49,9 @@
   --color-foreground: var(--foreground);
 
   --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
   --color-primary-100: var(--primary-100);
+  --color-surface-dark: var(--surface-dark);
 
   --color-red-500: var(--red-500);
 

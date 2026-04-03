@@ -4,12 +4,12 @@ import React from 'react';
 import SearchIcon from '@/assets/icon_search.svg';
 
 export type SearchProps = {
-  title?: string;                     // 상단 타이틀 제목
-  value: string;                      // 현재 입력된 검색어
-  onChange: (value: string) => void;  // 검색어 변경 시 호출되는 함수
-  onSearch?: (value: string) => void; // 검색 시 호출되는 함수
-  placeholder?: string;               // 입력 필드의 플레이스홀더 텍스트
-  className?: string;                 // 추가적인 CSS 클래스 이름
+  title?: string;
+  value: string;
+  onChange: (value: string) => void;
+  onSearch?: (value: string) => void;
+  placeholder?: string;
+  className?: string;
 };
 
 export default function Search({
@@ -17,57 +17,53 @@ export default function Search({
   value,
   onChange,
   onSearch,
-  placeholder = '내가 원하는 체험은',
+  placeholder = '체험을 검색해보세요',
   className = '',
 }: SearchProps) {
 
-  // Enter 키 입력 시 검색
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       onSearch?.(value.trim());
     }
   };
 
-  // 검색 버튼 클릭 시 검색
   const handleSearch = () => {
     onSearch?.(value.trim());
   };
 
   return (
-    <div className={`flex flex-col items-center gap-9 px-10 py-9 ${className}`}>
-
-      {/* 상단 타이틀 */}
+    <div className={`flex flex-col items-center gap-6 py-8 ${className}`}>
       {title && (
         <h1 className="text-h1 font-bold text-gray-950">
           {title}
         </h1>
       )}
 
-      {/* 검색 입력 필드 */}
-      <div className="flex flex-row justify-between w-full items-center pl-8 pr-3 py-[10px]
-                border border-transparent focus-within:border-primary-500 rounded-[24px] shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
-
-        <div className="flex flex-row gap-[10px] items-center w-full">
-          <SearchIcon className="w-6 h-6 text-gray-950" />
-          <input
-            type="text"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={placeholder}
-            className="w-full placeholder:text-gray-500 text-gray-950 text-h4 tracking-h4 weight-medium 
-                                caret-primary-500 focus:placeholder:text-transparent outline-none"
-          />
-        </div>
-
+      <div className="flex w-full items-center gap-3 pl-6 pr-2 py-2
+                      bg-white border border-gray-200 rounded-2xl
+                      shadow-[0_2px_12px_rgba(0,0,0,0.06)]
+                      focus-within:border-primary-500 focus-within:shadow-[0_2px_12px_rgba(99,102,241,0.12)]
+                      transition-all duration-150">
+        <SearchIcon className="w-5 h-5 shrink-0 text-gray-400" />
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          className="w-full text-gray-950 text-body-lg placeholder:text-gray-400
+                     caret-primary-500 focus:placeholder:text-transparent outline-none bg-transparent"
+        />
         <button
           type="button"
           onClick={handleSearch}
-          className="h-[50px] w-[120px] bg-primary-500 text-white text-body-lg text-center rounded-[14px] weight-medium cursor-pointer flex items-center justify-center"
+          className="shrink-0 h-11 px-6 bg-primary-500 hover:bg-primary-600
+                     text-white text-body font-semibold rounded-xl
+                     transition-colors duration-150 cursor-pointer"
         >
-          검색하기
+          검색
         </button>
       </div>
     </div>
-  )
+  );
 }

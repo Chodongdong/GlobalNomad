@@ -3,7 +3,6 @@
 import { useState } from "react";
 import BellIcon from "@/assets/icon_bell.svg";
 import DefaultProfile from "@/assets/default profile.svg";
-import Divider from "@/src/assets/divider.svg";
 import Link from "next/link";
 import Image from "next/image";
 import NotificationPanel from "@/src/components/Notification/NotificationPanel";
@@ -52,7 +51,8 @@ export default function LoggedInMenu({
           onClick={() => setOpen((prev) => !prev)}
           className="hover:opacity-70 transition"
         >
-          <BellIcon />
+          {/* 다크 헤더에서 보이도록 SVG 아이콘 반전 */}
+          <BellIcon className="brightness-0 invert" />
         </button>
 
         {open && !loading && (
@@ -65,7 +65,8 @@ export default function LoggedInMenu({
         )}
       </div>
 
-      <Divider className="mx-5" />
+      {/* Divider */}
+      <div className="w-px h-5 bg-white/20 mx-5" />
 
       <Link
         href="/mypage/my-profile"
@@ -73,22 +74,22 @@ export default function LoggedInMenu({
         className="flex items-center hover:opacity-70 transition"
       >
         {profileImageUrl ? (
-          <div className="relative w-10 h-10 overflow-hidden rounded-full">
+          <div className="relative w-9 h-9 overflow-hidden rounded-full ring-2 ring-white/10">
             <Image
               src={profileImageUrl}
               alt="프로필 이미지"
               fill
               className="object-cover"
-              sizes="40px"
+              sizes="36px"
               priority
             />
           </div>
         ) : (
-          <DefaultProfile />
+          <DefaultProfile className="brightness-0 invert opacity-80" />
         )}
       </Link>
 
-      <UserMenuDropDown userName={nickname} onLogout={onLogout} />
+      <UserMenuDropDown userName={nickname} onLogout={onLogout} className="ml-2.5" />
     </div>
   );
 }

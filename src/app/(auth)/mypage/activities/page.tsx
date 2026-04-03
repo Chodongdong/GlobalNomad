@@ -1,15 +1,18 @@
-'use client';
+"use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
-import { useInfiniteScroll } from '@/src/lib/hooks/useInfiniteScroll';
-import MyActivitiesCard from '@/src/components/Card/MyActivitiesCard';
-import Button from '@/src/components/Button/Button';
-import Earth from '@/src/assets/earth.svg';
+import { useInfiniteScroll } from "@/src/lib/hooks/useInfiniteScroll";
+import MyActivitiesCard from "@/src/components/Card/MyActivitiesCard";
+import Button from "@/src/components/Button/Button";
+import Earth from "@/src/assets/earth.svg";
 
-import { deleteMyActivity, getMyActivities } from '@/src/features/myActivities/api/myActivities';
-import type { MyActivity } from '@/src/features/myActivities/type';
+import {
+  deleteMyActivity,
+  getMyActivities,
+} from "@/src/features/myActivities/api/myActivities";
+import type { MyActivity } from "@/src/features/myActivities/type";
 
 const PAGE_SIZE = 20;
 
@@ -41,7 +44,9 @@ export default function MyActivitiesPage() {
         const merged = [...prev, ...data.activities];
 
         // 1) id 중복 제거
-        const unique = Array.from(new Map(merged.map((x) => [x.id, x])).values());
+        const unique = Array.from(
+          new Map(merged.map((x) => [x.id, x])).values()
+        );
 
         // 2) 최신순 정렬: createdAt 내림차순 → createdAt 없으면 id 내림차순
         unique.sort((a, b) => {
@@ -85,7 +90,7 @@ export default function MyActivitiesPage() {
 
       setCursorId(data.cursorId);
     } catch (e) {
-      alert(e instanceof Error ? e.message : '목록 조회 실패');
+      alert(e instanceof Error ? e.message : "목록 조회 실패");
       setHasNext(false);
     } finally {
       setIsLoading(false);
@@ -105,7 +110,7 @@ export default function MyActivitiesPage() {
   });
 
   const onClickCreate = () => {
-    router.push('/activities/create');
+    router.push("/activities/create");
   };
 
   // 실패하면 throw 해야 카드에서 모달이 닫히지 않음
@@ -114,7 +119,7 @@ export default function MyActivitiesPage() {
       await deleteMyActivity(id);
       setItems((prev) => prev.filter((x) => x.id !== id));
     } catch (e) {
-      const msg = e instanceof Error ? e.message : '삭제 실패';
+      const msg = e instanceof Error ? e.message : "삭제 실패";
       alert(msg);
       throw e;
     }
@@ -132,7 +137,7 @@ export default function MyActivitiesPage() {
         className="flex flex-col gap-[30px] w-full max-w-[640px] h-[calc(100vh-200px)] overflow-y-auto overscroll-contain noScrollbar"
       >
         {/* 무한스크롤 상단에 헤더 고정 */}
-        <div className="sticky top-0 z-10 bg-white flex items-center justify-between py-[10px] flex-shrink-0">
+        <div className="flex items-center justify-between py-[10px] flex-shrink-0">
           <div className="flex flex-col items-start justify-center gap-[10px]">
             <h1 className="text-h3 font-bold text-gray-950">내 체험 관리</h1>
             <p className="text-body text-gray-500">
@@ -156,7 +161,9 @@ export default function MyActivitiesPage() {
               <figure className="w-[182px] h-[182px] flex items-center justify-center">
                 <Earth />
               </figure>
-              <p className="text-h4 text-gray-600">아직 등록한 체험이 없어요.</p>
+              <p className="text-h4 text-gray-600">
+                아직 등록한 체험이 없어요.
+              </p>
             </div>
           ) : (
             <>

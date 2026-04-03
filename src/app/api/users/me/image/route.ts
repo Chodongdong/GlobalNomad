@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
-    if (error instanceof Error && error.message === 'UNAuTHORiZED') {
+    if (error instanceof Error && error.message === 'UNAUTHORIZED') {
       return NextResponse.json(
         { error: '인증 토큰이 없습니다.' },
         {status: 401 }

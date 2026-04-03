@@ -24,15 +24,19 @@ export default function Header({ initialUser }: HeaderProps) {
   return (
     <HeaderLayout>
       <div className="flex w-full items-center justify-between">
-        {/* 왼쪽 */}
+        {/* 왼쪽 - 로고 + 워드마크 */}
         <Link
           href="/"
           onClick={(e) => {
             e.preventDefault();
             window.location.href = "/";
           }}
+          className="flex items-center gap-2.5 select-none"
         >
           <Logo />
+          <span className="text-white font-bold text-lg tracking-tight">
+            Roami
+          </span>
         </Link>
 
         {/* 오른쪽 */}

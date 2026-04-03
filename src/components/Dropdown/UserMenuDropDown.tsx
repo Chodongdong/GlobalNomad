@@ -35,7 +35,7 @@ export default function UserMenuDropDownProps({
       align="center"
       showArrow={false}
       fullWidth={false}
-      className={`[&>button>span]:hover:text-gray-700 ${className}`}
+      className={`[&>button>span]:text-white/80 [&>button>span]:hover:text-white ${className}`}
       menuClassName="min-w-[100px] mt-1"
     />
   );

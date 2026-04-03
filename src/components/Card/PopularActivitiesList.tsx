@@ -153,7 +153,7 @@ export default function PopularActivitiesList() {
 
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-hidden scroll-smooth"
+        className="flex gap-4 overflow-x-hidden scroll-smooth py-3"
       >
         {items.map((item) => (
           <div key={item.id} className="flex-shrink-0 w-[calc(25%-12px)]">

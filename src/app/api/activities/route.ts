@@ -25,19 +25,26 @@ export async function GET(req: NextRequest) {
 
   const url = new URL(req.url);
   const backendUrl = new URL(`${API_URL}/activities`);
-  // 쿼리 파라미터는 그대로 백엔드에 패스스루
   url.searchParams.forEach((v, k) => backendUrl.searchParams.set(k, v));
 
   const accessToken = await getAccessToken();
 
-  const res = await fetch(backendUrl.toString(), {
-    method: 'GET',
-    headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : undefined,
-    cache: 'no-store',
-  });
+  try {
+    const res = await fetch(backendUrl.toString(), {
+      method: 'GET',
+      headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : undefined,
+      cache: 'no-store',
+    });
 
-  const text = await res.text();
-  return new NextResponse(text, { status: res.status });
+    const text = await res.text();
+    return new NextResponse(text, { status: res.status });
+  } catch (error) {
+    console.error('GET /api/activities error:', error);
+    return NextResponse.json(
+      { message: '체험 목록을 불러오지 못했습니다.' },
+      { status: 500 }
+    );
+  }
 }
 
 // POST /api/activities
@@ -50,17 +57,25 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: '로그인이 필요합니다.' }, { status: 401 });
   }
 
-  const body = await req.json();
+  try {
+    const body = await req.json();
 
-  const res = await fetch(`${API_URL}/activities`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(body),
-  });
+    const res = await fetch(`${API_URL}/activities`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(body),
+    });
 
-  const text = await res.text();
-  return new NextResponse(text, { status: res.status });
+    const text = await res.text();
+    return new NextResponse(text, { status: res.status });
+  } catch (error) {
+    console.error('POST /api/activities error:', error);
+    return NextResponse.json(
+      { message: '체험 등록에 실패했습니다.' },
+      { status: 500 }
+    );
+  }
 }

@@ -46,7 +46,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <div className="mx-auto flex min-h-screen max-w-105 flex-col items-center justify-center px-4">
         <Link href="/" className="cursor-pointer select-none">
           <LogoIcon />

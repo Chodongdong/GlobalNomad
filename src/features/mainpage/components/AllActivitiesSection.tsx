@@ -32,8 +32,11 @@ export default function AllActivitiesSection({
 
   return (
     <section className="w-full h-241 flex flex-col gap-7.5">
-      <div>
-        <h2 className="h-9.5 flex items-center text-h1 font-bold">🛼 모든 체험</h2>
+      <div className="flex flex-col gap-1">
+        <p className="text-xs font-semibold text-primary-500 tracking-widest uppercase">
+          All Experiences
+        </p>
+        <h2 className="text-h1 font-bold text-gray-950">모든 체험</h2>
       </div>
       <div>
         <AllActivitiesList onCategoryChange={handleCategoryChange} />

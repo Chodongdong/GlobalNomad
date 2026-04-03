@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import CardBase from '@/src/components/Card/CardBase';
 import DefaultThumbnail from '@/assets/activity-default-thumbnail.svg';
 import StarIcon from '@/assets/icon_star.svg';
 
@@ -22,56 +21,52 @@ export default function ActivityCard({
   bannerImageUrl,
 }: ActivityCardProps) {
   return (
-    <div className="max-w-[332px]">
-      <Link href={`/activities/${id}`} className="block group">
-        <CardBase
-          width="w-full"
-          height="h-auto"
-        >
+    <Link href={`/activities/${id}`} className="block group">
+      <div className="rounded-2xl overflow-hidden bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.10)] transition-shadow duration-300">
 
-          {/* 이미지 영역 */}
-          <div className="relative w-full h-[290px] bg-gray-100">
-            {bannerImageUrl ? (
-              <Image
-                src={bannerImageUrl}
-                alt={`${title} 체험 썸네일 이미지`}
-                fill
-                className="object-cover object-center transition-transform duration-300 ease-in-out group-hover:scale-105"
-                sizes="262px"
-              />
-            ) : (
-              <DefaultThumbnail
-                aria-label="체험 썸네일 이미지"
-                className="w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-105"
-                preserveAspectRatio="xMidYMid slice"
-              />
-            )}
+        {/* 이미지 영역 */}
+        <div className="relative w-full h-52 bg-gray-100 overflow-hidden">
+          {bannerImageUrl ? (
+            <Image
+              src={bannerImageUrl}
+              alt={`${title} 체험 썸네일 이미지`}
+              fill
+              className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 332px"
+            />
+          ) : (
+            <DefaultThumbnail
+              aria-label="체험 썸네일 이미지"
+              className="w-full h-full transition-transform duration-500 ease-out group-hover:scale-105"
+              preserveAspectRatio="xMidYMid slice"
+            />
+          )}
+
+          {/* 평점 배지 */}
+          <div className="absolute top-3 left-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm rounded-full px-2.5 py-1">
+            <StarIcon className="w-3 h-3" />
+            <span className="text-white text-xs font-semibold leading-none">{rating.toFixed(1)}</span>
           </div>
+        </div>
 
-          {/* 텍스트 영역 */}
-          <CardBase
-            boxShadow="sm"
-            rounded="lg"
-            overflow={false}
-            className="-mt-[60px] relative"
-          >
-            <div className="flex flex-col px-[30px] py-[20px] gap-[18px]">
-              <div className="flex flex-col min-w-0">
-                <div className="text-h4 font-bold leading-6 truncate">{title}</div>
-                <div className="flex gap-[2px]">
-                  <StarIcon aria-label="별점" className="w-[20px] h-[20px]" />
-                  <span className="ml-[3px] text-body leading-6">{rating}</span>
-                  <span className="text-gray-400 text-body leading-6">({reviewCount.toLocaleString()})</span>
-                </div>
-              </div>
-              <div>
-                <span className="text-h4 font-bold leading-6">₩ {price.toLocaleString()}</span>
-                <span className="text-gray-400 text-body-lg leading-6">{' '}/ 인</span>
-              </div>
+        {/* 텍스트 영역 */}
+        <div className="px-5 py-4 flex flex-col gap-2.5">
+          <h3 className="font-bold text-gray-950 text-[15px] leading-snug line-clamp-2">
+            {title}
+          </h3>
+          <div className="flex items-center justify-between">
+            <span className="text-gray-400 text-xs">
+              리뷰 {reviewCount.toLocaleString()}개
+            </span>
+            <div className="flex items-baseline gap-1">
+              <span className="font-bold text-gray-950 text-[15px]">
+                ₩{price.toLocaleString()}
+              </span>
+              <span className="text-gray-400 text-xs">/ 인</span>
             </div>
-          </CardBase>
-        </CardBase>
-      </Link>
-    </div>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }

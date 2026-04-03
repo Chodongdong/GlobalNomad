@@ -34,8 +34,16 @@ export const Input = forwardRef<
   const inputType = isPassword && showPassword ? 'text' : type;
   const isTextarea = multiline;
 
+  const borderClass = disabled
+    ? 'border-gray-100'
+    : error
+    ? 'border-red-500 ring-4 ring-red-500/10'
+    : focused
+    ? 'border-primary-500 ring-4 ring-primary-500/10'
+    : 'border-gray-200';
+
   return (
-    <div className={`flex flex-col gap-[6px] ${fullWidth ? 'w-full' : ''}`}>
+    <div className={`flex flex-col gap-1.5 ${fullWidth ? 'w-full' : ''}`}>
       {label && (
         <label className="text-body-lg text-gray-950 font-bold">
           {label}
@@ -50,15 +58,13 @@ export const Input = forwardRef<
             aria-invalid={!!error}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            className={`w-full min-h-[200px] px-5 pt-4 pb-4
-              rounded-[16px] bg-white border
+            className={`w-full min-h-50 px-5 pt-4 pb-4
+              rounded-2xl bg-white border
               text-body-lg leading-normal text-gray-950
               placeholder:text-gray-400
-              resize-none outline-none
-              ${disabled && 'border-gray-100 bg-gray-100'}
-              ${!disabled && error && 'border-red-500'}
-              ${!disabled && !error && focused && 'border-primary-500'}
-              ${!disabled && !error && !focused && 'border-gray-100'}
+              resize-none outline-none transition-all duration-150
+              disabled:border-gray-100 disabled:bg-gray-100
+              ${borderClass}
               ${className}`}
             {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
           />
@@ -70,15 +76,12 @@ export const Input = forwardRef<
             aria-invalid={!!error}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            className={`w-full min-h-[54px] px-5 py-4
-              rounded-[16px] bg-white border
+            className={`w-full min-h-13.5 px-5 py-4
+              rounded-2xl bg-white border
               text-body-lg leading-5 text-gray-950
-              placeholder:text-gray-400 outline-none
-              disabled:bg-gray-100 disabled:text-gray-400
-              ${disabled && 'border-gray-100'}
-              ${!disabled && error && 'border-red-500'}
-              ${!disabled && !error && focused && 'border-primary-500'}
-              ${!disabled && !error && !focused && 'border-gray-100'}
+              placeholder:text-gray-400 outline-none transition-all duration-150
+              disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-100
+              ${borderClass}
               ${className}`}
             {...(rest as React.InputHTMLAttributes<HTMLInputElement>)}
           />
