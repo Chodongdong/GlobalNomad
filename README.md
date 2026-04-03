@@ -1,234 +1,173 @@
-# 📚 GlobalNomad
+# Roami
 
-**GlobalNomad는
-하나의 계정으로 판매자와 체험자 역할을 모두 수행할 수 있는
-체험 기반 예약 플랫폼입니다.**
+**Roami는 하나의 계정으로 판매자와 체험자 역할을 모두 수행할 수 있는 로컬 체험 예약 플랫폼입니다.**
 
-## ✨ 소개
-사용자가 체험 상품을 직접 등록해 판매자가 될 수 있으며,
-동시에 다른 사용자의 체험을 예약하는 체험자로도 활동할 수 있습니다.
+> GlobalNomad 팀 프로젝트를 기반으로 리브랜딩 및 리디자인한 개인 포크 버전입니다.
 
-### 주요 기능
+---
 
- 회원가입 & 로그인
- 체험 등록 및 관리 (판매자)
- 체험 탐색 & 예약 (체험자)
- 예약 상태 관리
- 마이페이지
- 리뷰 & 알림
+## ✨ 주요 기능
 
-## 🛠️ 기술 스택
+- **체험 탐색** — 평점순 추천 체험 슬라이드쇼, 카테고리/가격 필터, 키워드 검색
+- **체험 예약** — 날짜·인원 선택 후 실시간 예약
+- **체험 등록 및 관리** — 판매자로서 체험 CRUD, 예약 현황 대시보드
+- **마이페이지** — 예약 내역, 리뷰 작성, 프로필 수정
+- **인증** — 이메일 로그인 / 카카오 소셜 로그인
+- **알림** — 예약 상태 변경 실시간 알림
 
-### 프레임워크 & 라이브러리
+---
+
+## 🛠 기술 스택
+
+### 프레임워크 & 언어
 
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-- **Next.js 16.0.3** - React 기반 풀스택 프레임워크 (App Router, Server Actions)
-- **React 19.2.0** - 사용자 인터페이스 구축 (React Compiler 적용)
-- **TypeScript 5** - 정적 타입 검사
+| 기술 | 버전 | 용도 |
+|------|------|------|
+| Next.js | 16 | App Router, Route Handlers, Server Components |
+| React | 19 | UI 구성 |
+| TypeScript | 5 | 정적 타입 검사 |
 
 ### 스타일링
 
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-- **Tailwind CSS 4** - 유틸리티 퍼스트 CSS 프레임워크
-- **tailwind-variants** - 타입 안전한 variant 관리
-- **clsx & tailwind-merge** - 조건부 클래스 병합
-- **Pretendard Font** - 한국어 최적화 폰트
+- **Tailwind CSS 4** — 유틸리티 퍼스트 CSS
+- **Pretendard** — 한국어 최적화 폰트
+
+### 상태 관리
+
+- **Zustand 5** — 클라이언트 상태 관리
+  - `userStore` — 유저 프로필
+  - `mypageStore` — 마이페이지 UI 상태
+  - `activitiesStore` — 활동 목록/필터
 
 ### 개발 도구
 
 ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/prettier-%23F7B93E.svg?style=for-the-badge&logo=prettier&logoColor=black)
 
-- **ESLint 9** - 코드 품질 관리
-- **Prettier** - 코드 포맷팅
-- **Husky** - Git hooks 자동화
+- ESLint 9, Prettier, Husky + commitlint
 
-### 배포 환경
+---
 
-![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+## 🎨 디자인 시스템
 
-- **Vercel** - 자동 배포 환경
-- **배포 URL**: https://global-nomad-alpha.vercel.app/
-- **프리뷰 배포** - PR 생성 시 미리보기 환경 자동 생성
+| 항목 | 값 |
+|------|-----|
+| Primary | `#6366F1` (Indigo) |
+| Background | `#F5F6FF` |
+| Header | `#0F172A` (Dark Navy) |
+| Font | Pretendard (500, 700) |
 
-## 👥 Team
-
-| 이름       | 담당 업무                                          |
-| ---------- | -------------------------------------------------- |
-| **권현성** | 체험상세, 계정설정, 버튼, 내 정보 페이지 전체 레이아웃 |
-| **조동현** | 로그인/회원가입, 전역상태, 헤더/푸터, 모달, 예약 내역, 예약 현황    |
-| **김준열** | 인풋, 사이드메뉴, 드롭다운, 캘린더셀, 뱃지              |
-| **전성현** | 체험 카드, 예약 카드, 내 체험 관리 카드, 검색 기능, 메인 페이지             |
+---
 
 ## 📂 디렉토리 구조
 
 ```
-GLOBALNOMAD/                
-├── src/
-│   ├── app/               
-│   │   ├── (auth)/       
-│   │   │   ├── activities/
-│   │   │   │   ├── [activityId]/
-│   │   │   │   │   └─ edit/
-│   │   │   │   │   
-│   │   │   │   └─ create
-│   │   │   │   
-│   │   │   ├── mypage/
-│   │   │   │   ├── activities/
-│   │   │   │   ├── my-profile/
-│   │   │   │   ├── reservation-status/
-│   │   │   │   ├── reservations/
-│   │   │   │   ├── layout
-│   │   │   │   └─  MypageLayout
-│   │   │   │
-│   │   │   └─ layout
-│   │   ├── public/
-│   │   │   ├── login/    
-│   │   │   ├── oauth/
-│   │   │   │   └── signup/
-│   │   │   │   │   └── kakao/   
-│   │   │   ├── signup/    
-│   │   │   └── layout 
-│   │   ├── activities/           
-│   │   │   ├── [activityId]/     
-│   │   │   └── layout
-│   │   ├── api/
-│   │   │   ├── activities/
-│   │   │   │   ├── [activityId]/
-│   │   │   │   │   └── reservations/
-│   │   │   │   └── image/  
-│   │   │   ├── login/   
-│   │   │   ├── logout/  
-│   │   │   ├── my-activities/
-│   │   │   │   └──[activityId]/
-│   │   │   ├── my-notifications/
-│   │   │   │   └──[notificationId]/
-│   │   │   ├── my-reservations/
-│   │   │   │   └── [reservationId]/
-│   │   │   ├── refresh/
-│   │   │   ├── signup/ 
-│   │   │   ├── token/  
-│   │   │   └── users/
-│   │   │   │   └── me/
-│   │   │   │   │   └── image/
-│   │   ├── favicon.ico
-│   │   ├── globals.css
-│   │   ├── layout
-│   │   ├── aseets/
-│   ├── components/  
-│   │   ├── Button/  
-│   │   ├── Calendar/
-│   │   ├── Card/   
-│   │   ├── Dropdown/
-│   │   │   └── base/
-│   │   ├── Header/       
-│   │   ├── Footer/       
-│   │   ├── Modal/        
-│   │   ├── Notification/  
-│   │   ├── Pagination/   
-│   │   ├── Input/       
-│   │   ├── Popover/    
-│   │   ├── Reservation/
-│   │   ├── Search/
-│   │   └── SideMenu/
-│   ├── features/    
-│   │   ├── ActivityCreate     
-│   │   │   ├── api/
-│   │   │   ├── components/
-│   │   │   ├── hooks/
-│   │   │   ├── types.ts
-│   │   │   └── utils/
-│   │   ├── mainpage/
-│   │   │   ├── activities.ts
-│   │   │   └── components/
-│   │   ├── myActivities/
-│   │   │   ├── api/
-│   │   │   ├── mock/
-│   │   │   └── type.ts
-│   │   ├── mypage
-│   │   │   ├── reservation-status/
-│   │   │   │   └── hooks/
-│   │   │   ├── reservations/
-│   │   │   │   ├── components/
-│   │   │   │   ├── hooks/
-│   │   │   │   ├── mocks/
-│   │   │   │   └── utils/
-│   │   │   └── services/
-│   │   └── notification/
-│   │   │   └── hooks/
-│   ├── lib/             
-│   │   ├── api/
-│   │   ├── hooks/
-│   │   └── server/
-│   ├── types/             
-│   └── styles/            
-├── eslint.config.mjs      
-├── .prettierrc            
-└── package.json
+src/
+├── app/
+│   ├── (auth)/               # 인증 필요 라우트
+│   │   ├── activities/       # 체험 등록·수정
+│   │   ├── mypage/           # 마이페이지
+│   │   ├── loading.tsx       # 로딩 UI
+│   │   └── layout.tsx        # 헤더·푸터 포함 레이아웃
+│   ├── (public)/             # 비인증 라우트
+│   │   ├── login/
+│   │   ├── signup/
+│   │   └── oauth/
+│   ├── activities/           # 체험 상세
+│   ├── api/                  # Route Handlers
+│   ├── error.tsx             # 글로벌 에러 페이지
+│   ├── not-found.tsx         # 404 페이지
+│   └── layout.tsx
+├── components/               # 공통 UI 컴포넌트
+│   ├── Button/
+│   ├── Card/
+│   ├── Dropdown/
+│   ├── Header/
+│   ├── Footer/
+│   ├── Input/
+│   ├── Modal/
+│   ├── Notification/
+│   ├── Pagination/
+│   ├── Search/
+│   └── SideMenu/
+├── features/                 # 기능별 모듈
+│   ├── ActivityCreate/
+│   ├── mainpage/
+│   ├── mypage/
+│   └── notification/
+├── store/                    # Zustand 스토어
+│   ├── userStore.ts
+│   ├── mypageStore.ts
+│   └── activitiesStore.ts
+├── lib/
+│   ├── api/                  # fetch 유틸 (authFetch, serverAuthFetch)
+│   ├── hooks/
+│   └── server/
+├── styles/
+│   ├── theme.css             # 디자인 토큰
+│   └── fonts.css
+└── types/
 ```
 
-## 🚩 Starting (프로젝트 시작 방법)
+---
 
-### 필수 조건
+## 🚀 로컬 실행
 
-- **Node.js** 18.0.0 이상
-- **pnpm**
+### 사전 요구사항
+
+- Node.js 18+
+- pnpm 10+
 
 ### 설치 및 실행
 
-1. **저장소 클론**
-
-   ```bash
-   git clone
-   cd GlobalNomad
-   ```
-
-2. **의존성 설치**
-
-   ```bash
-   pnpm install
-   ```
-
-3. **환경 변수 설정**
-
-   프로젝트 루트에 `.env` 파일을 생성하고 다음 내용을 추가하세요:
-
-   ```bash
-  
-  NEXT_PUBLIC_API_URL=https://sp-globalnomad-api.vercel.app/19-7
-  NEXT_PUBLIC_BASE_URL=http://localhost:3000/
-
-  NEXT_PUBLIC_KAKAO_MAP_API_KEY=53bbfc0c7bdd02c4fee2f9d5ddfd301a
-   ```
-
-4. **개발 서버 실행**
-
-   ```bash
-   pnpm run dev
-   ```
-
-5. **브라우저에서 확인**
-   ```
-   http://localhost:3000
-   ```
-
-### 사용 가능한 스크립트
-
 ```bash
-pnpm run dev          # 개발 서버 실행
-pnpm run build        # 프로덕션 빌드
-pnpm run start        # 프로덕션 서버 실행
-pnpm run lint         # ESLint 검사
-pnpm run lint:fix     # ESLint 자동 수정
-pnpm run format       # Prettier 포맷팅
-pnpm run format:check # Prettier 검사만 실행
-pnpm run type-check   # TypeScript 타입 검사
+# 1. 클론
+git clone https://github.com/Chodongdong/GlobalNomad.git
+cd GlobalNomad
+
+# 2. 의존성 설치
+pnpm install
+
+# 3. 환경 변수 설정
+cp .env.example .env
+# .env 파일에 아래 값 입력
 ```
 
-## 🔌 API Routes
+```env
+NEXT_PUBLIC_API_URL=https://sp-globalnomad-api.vercel.app/19-7
+NEXT_PUBLIC_BASE_URL=http://localhost:3000/
+NEXT_PUBLIC_KAKAO_MAP_API_KEY=your_kakao_map_key
+KAKAO_CLIENT_ID=your_kakao_client_id
+KAKAO_REDIRECT_URI=http://localhost:3000/oauth/signup/kakao
+```
 
-프로젝트는 Next.js App Router의 Route Handlers를 사용하여 백엔드 API를 구현합니다.
+```bash
+# 4. 개발 서버 실행
+pnpm dev
+```
+
+### 스크립트
+
+```bash
+pnpm dev        # 개발 서버
+pnpm build      # 프로덕션 빌드
+pnpm start      # 프로덕션 서버
+pnpm lint       # ESLint 검사
+```
+
+---
+
+## 👥 원본 팀 (GlobalNomad)
+
+| 이름 | 담당 |
+|------|------|
+| 권현성 | 체험 상세, 계정 설정, 내 정보 페이지 |
+| 조동현 | 로그인/회원가입, 전역 상태, 헤더/푸터, 모달, 예약 내역·현황 |
+| 김준열 | 인풋, 사이드메뉴, 드롭다운, 캘린더, 뱃지 |
+| 전성현 | 체험 카드, 예약 카드, 내 체험 관리, 검색, 메인 페이지 |
