@@ -43,6 +43,7 @@ export default function LoginPage() {
     }
 
     router.push("/");
+    router.refresh();
   };
 
   return (
