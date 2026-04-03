@@ -10,6 +10,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "date-fns": "^4.1.0",
     "next": "16.0.10",
     "react": "19.2.1",
