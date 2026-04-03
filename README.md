@@ -25,11 +25,11 @@
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-| 기술 | 버전 | 용도 |
-|------|------|------|
-| Next.js | 16 | App Router, Route Handlers, Server Components |
-| React | 19 | UI 구성 |
-| TypeScript | 5 | 정적 타입 검사 |
+| 기술       | 버전 | 용도                                          |
+| ---------- | ---- | --------------------------------------------- |
+| Next.js    | 16   | App Router, Route Handlers, Server Components |
+| React      | 19   | UI 구성                                       |
+| TypeScript | 5    | 정적 타입 검사                                |
 
 ### 스타일링
 
@@ -56,12 +56,12 @@
 
 ## 🎨 디자인 시스템
 
-| 항목 | 값 |
-|------|-----|
-| Primary | `#6366F1` (Indigo) |
-| Background | `#F5F6FF` |
-| Header | `#0F172A` (Dark Navy) |
-| Font | Pretendard (500, 700) |
+| 항목       | 값                    |
+| ---------- | --------------------- |
+| Primary    | `#6366F1` (Indigo)    |
+| Background | `#F5F6FF`             |
+| Header     | `#0F172A` (Dark Navy) |
+| Font       | Pretendard (500, 700) |
 
 ---
 
@@ -139,14 +139,6 @@ cp .env.example .env
 # .env 파일에 아래 값 입력
 ```
 
-```env
-NEXT_PUBLIC_API_URL=https://sp-globalnomad-api.vercel.app/19-7
-NEXT_PUBLIC_BASE_URL=http://localhost:3000/
-NEXT_PUBLIC_KAKAO_MAP_API_KEY=your_kakao_map_key
-KAKAO_CLIENT_ID=your_kakao_client_id
-KAKAO_REDIRECT_URI=http://localhost:3000/oauth/signup/kakao
-```
-
 ```bash
 # 4. 개발 서버 실행
 pnpm dev
@@ -162,12 +154,3 @@ pnpm lint       # ESLint 검사
 ```
 
 ---
-
-## 👥 원본 팀 (GlobalNomad)
-
-| 이름 | 담당 |
-|------|------|
-| 권현성 | 체험 상세, 계정 설정, 내 정보 페이지 |
-| 조동현 | 로그인/회원가입, 전역 상태, 헤더/푸터, 모달, 예약 내역·현황 |
-| 김준열 | 인풋, 사이드메뉴, 드롭다운, 캘린더, 뱃지 |
-| 전성현 | 체험 카드, 예약 카드, 내 체험 관리, 검색, 메인 페이지 |
